@@ -6,7 +6,23 @@
     </head>
     <body>
         <script>
-            
+            //getComputerChoice - randomly returns 'rock', 'paper', or 'scissors'
+            //Use Random number to choose option
+            function getComputerChoice() {
+                //get a random number between 0 and 2 
+                let randomNumber = Math.floor(Math.random() * 3) ;;
+                //return rock paper or scissors based on number
+                switch(randomNumber) {
+                    case 0:
+                        return console.log("Rock")
+                        break;
+                    case 1:
+                        return console.log("Paper")
+                        break;
+                    default: 
+                        return console.log("Scissors")
+                }
+            }
 
 
         </script>
