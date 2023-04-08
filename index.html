@@ -32,7 +32,7 @@
                 return playerInput
             }
                 
-            //Verify who won
+            
             function playRound() {
                 let computerChoice;
                 let playerChoice;
@@ -43,23 +43,31 @@
 
                 //get result from getWinner
                 result = getWinner(playerChoice, computerChoice);
-
-                //output message based on result
+                
+                //displays the result of the round
                 switch (result) {
                     case "tie": 
-                        return "It's a tie. You both chose " + playerChoice;
+                        console.log("It's a tie. You both chose " + playerChoice);
+                        break;
                     case "win": 
-                        return "You win! " + playerChoice + " beats " + computerChoice + "."
+                        console.log("You win! " + playerChoice + " beats " + computerChoice + ".")
+                        break;
                     default: 
-                        return "You lose! " + computerChoice + " beats " + playerChoice + "."
+                        console.log("You lose! " + computerChoice + " beats " + playerChoice + ".")
                 }
                 
-                
-                //computer wins
-                
+                //returns the result of the round
+                return result
+
             }
-            //Output message
-            //determine who is the winner or a tie
+
+            function displayResult(result) {
+                 //output message based on result
+                 
+                
+
+            }
+            
             function getWinner(playerChoice, computerChoice) {
                 //computerChoice and playerChoice match that's a tie    
                 playerChoice = playerChoice.toLowerCase();
@@ -74,6 +82,36 @@
                         return "win"
                     default: 
                         return "lose"
+                }
+            }
+
+            function game() {
+                //keep tally of how many wins
+                let playerWins = 0;
+                let computerWins = 0;
+                let result;
+
+
+                //iterate through the game 5 times and keep track of wins
+                for (let i = 0; i < 5; i++) {
+                    result = playRound()
+                    switch(result) {
+                        case "win": 
+                            playerWins += 1;
+                            break;
+                        case "lose":
+                            computerWins +=1;
+                            break;
+                    }
+                }
+
+                //Winning message
+                if (playerWins > computerWins) {
+                    console.log("Congrats! You won! Player Wins: " + playerWins + " Computer Wins: " + computerWins)
+                } else if (computerWins > playerWins) {
+                    console.log("Too bad. You lost. Better luck next time! Computer Wins: " + computerWins + " Player Wins: " + playerWins)
+                } else {
+                    console.log("It's a tie. Player Wins: " + playerWins + " Computer Wins: " + computerWins)
                 }
             }
 
