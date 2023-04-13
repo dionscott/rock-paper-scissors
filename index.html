@@ -14,7 +14,21 @@
             const rounds = document.querySelector('#round');
             const results = document.createElement('p');
             const container = document.querySelector('#container');
+            //keeps track of wins and ties
+            let playerWins = 0;
+            let computerWins = 0;
+            let tie = 0;
+            function score(result) {
+                //check if win, lose, or tie and change score
+            }
 
+            //reset function that resets the paramaters
+            function reset() {
+                round = 0;
+                playerWins = 0;
+                computerWins = 0;
+                tie = 0;
+            }
             //updates round number
             let round = 0;
             function updateRound() {
@@ -22,10 +36,11 @@
                 if (round < 5) {
                     rounds.textContent = `Round: ${round}`
                 } else {
-                    round = 0
+                    reset()
                     rounds.textContent = `New game?`
+                    //output the results of the game
                 }
-                
+
             }
 
             //getComputerChoice - randomly returns 'rock', 'paper', or 'scissors'
