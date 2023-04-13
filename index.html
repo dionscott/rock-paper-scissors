@@ -5,7 +5,23 @@
         <title>Rock, Paper, Scissors!</title>
     </head>
     <body>
+        <h2 id="round">Welcome!</h2>
+        <button id="rock">Rock!</button>
+        <button id="paper">Paper!</button>
+        <button id="scissors">Scissors!</button>
+        <div id="container"></div>
         <script>
+            const rounds = document.querySelector('#round');
+            const results = document.createElement('p');
+            const container = document.querySelector('#container');
+
+            //updates round number
+            let round = 0;
+            function updateRound() {
+                round += 1;
+                rounds.textContent = `Round: ${round}`
+            }
+
             //getComputerChoice - randomly returns 'rock', 'paper', or 'scissors'
             //Use Random number to choose option
             function getComputerChoice() {
@@ -24,43 +40,6 @@
                 }
             }
 
-            //Take player input and return their answer in lower case
-            function getPlayerInput() {
-                let playerInput = prompt("Rock, Paper, or Scissors?");
-                //Put answer into lowercase
-                playerInput = playerInput.toLowerCase();
-                return playerInput
-            }
-                
-            
-            function playRound() {
-                let computerChoice;
-                let playerChoice;
-                let result;
-
-                computerChoice = getComputerChoice();
-                playerChoice = getPlayerInput();
-
-                //get result from getWinner
-                result = getWinner(playerChoice, computerChoice);
-                
-                //displays the result of the round
-                switch (result) {
-                    case "tie": 
-                        console.log("It's a tie. You both chose " + playerChoice);
-                        break;
-                    case "win": 
-                        console.log("You win! " + playerChoice + " beats " + computerChoice + ".")
-                        break;
-                    default: 
-                        console.log("You lose! " + computerChoice + " beats " + playerChoice + ".")
-                }
-                
-                //returns the result of the round
-                return result
-
-            }
-            
             function getWinner(playerChoice, computerChoice) {
                 //computerChoice and playerChoice match that's a tie    
                 playerChoice = playerChoice.toLowerCase();
@@ -77,37 +56,47 @@
                         return "lose"
                 }
             }
-
-            function game() {
-                //keep tally of how many wins
-                let playerWins = 0;
-                let computerWins = 0;
+            //removed player input via prompt
+                
+            //changed playRound to have the player choice input
+            function playRound(choice) {
+                let computerChoice;
+                let playerChoice;
                 let result;
 
+                computerChoice = getComputerChoice();
+                playerChoice = choice;
 
-                //iterate through the game 5 times and keep track of wins
-                for (let i = 0; i < 5; i++) {
-                    result = playRound()
-                    switch(result) {
-                        case "win": 
-                            playerWins += 1;
-                            break;
-                        case "lose":
-                            computerWins +=1;
-                            break;
-                    }
+                //get result from getWinner
+                result = getWinner(playerChoice, computerChoice);
+                
+                //displays the result of the round
+                switch (result) {
+                    case "tie": 
+                        results.textContent = "It's a tie. You both chose " + playerChoice;
+                        container.appendChild(results);
+                        break;
+                    case "win": 
+                        results.textContent = "You win! " + playerChoice + " beats " + computerChoice + "."
+                        container.appendChild(results);
+                        break;
+                    default: 
+                        results.textContent = "You lose! " + computerChoice + " beats " + playerChoice + "."
+                        container.appendChild(results);
                 }
-
-                //Winning message
-                if (playerWins > computerWins) {
-                    console.log("Congrats! You won! Player Wins: " + playerWins + " Computer Wins: " + computerWins)
-                } else if (computerWins > playerWins) {
-                    console.log("Too bad. You lost. Better luck next time! Computer Wins: " + computerWins + " Player Wins: " + playerWins)
-                } else {
-                    console.log("It's a tie. Player Wins: " + playerWins + " Computer Wins: " + computerWins)
-                }
+                //using result find the winner and update round number
+                // updateRound();
             }
+            
+            const rock = document.querySelector('#rock');
+            const paper = document.querySelector('#paper');
+            const scissors = document.querySelector('#scissors');
 
+            rock.addEventListener('click', () => playRound('rock'));
+            paper.addEventListener('click', () => playRound('paper'));
+            scissors.addEventListener('click', () => playRound('scissors'));
+
+            //removed game function
         </script>
     </body>
 </html>
