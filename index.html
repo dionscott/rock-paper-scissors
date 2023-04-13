@@ -19,7 +19,13 @@
             let round = 0;
             function updateRound() {
                 round += 1;
-                rounds.textContent = `Round: ${round}`
+                if (round < 5) {
+                    rounds.textContent = `Round: ${round}`
+                } else {
+                    round = 0
+                    rounds.textContent = `New game?`
+                }
+                
             }
 
             //getComputerChoice - randomly returns 'rock', 'paper', or 'scissors'
@@ -74,18 +80,16 @@
                 switch (result) {
                     case "tie": 
                         results.textContent = "It's a tie. You both chose " + playerChoice;
-                        container.appendChild(results);
                         break;
                     case "win": 
                         results.textContent = "You win! " + playerChoice + " beats " + computerChoice + "."
-                        container.appendChild(results);
                         break;
                     default: 
-                        results.textContent = "You lose! " + computerChoice + " beats " + playerChoice + "."
-                        container.appendChild(results);
+                        results.textContent = "You lose! " + computerChoice + " beats " + playerChoice + "."             
                 }
                 //using result find the winner and update round number
-                // updateRound();
+                container.appendChild(results);
+                updateRound();
             }
             
             const rock = document.querySelector('#rock');
