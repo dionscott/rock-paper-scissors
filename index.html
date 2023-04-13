@@ -6,6 +6,7 @@
     </head>
     <body>
         <h2 id="round">Welcome!</h2>
+        <div id="score"></div>
         <button id="rock">Rock!</button>
         <button id="paper">Paper!</button>
         <button id="scissors">Scissors!</button>
@@ -14,12 +15,25 @@
             const rounds = document.querySelector('#round');
             const results = document.createElement('p');
             const container = document.querySelector('#container');
+            const currentScore = document.querySelector('#score');
+
             //keeps track of wins and ties
             let playerWins = 0;
             let computerWins = 0;
             let tie = 0;
+
+            //check this function. Not adding to wins or losses or ties
             function score(result) {
                 //check if win, lose, or tie and change score
+                if (result == "win") {
+                    playerWins += 1;
+                } else if (result == "lose") {
+                    computerWins += 1;
+                } else {
+                    tie += 1;
+                }
+                currentScore.textContent = `Player Wins : ${playerWins} Computer Wins: ${computerWins} Tie: ${tie}`
+                // currentScore.appendChild(container)
             }
 
             //reset function that resets the paramaters
@@ -29,6 +43,7 @@
                 computerWins = 0;
                 tie = 0;
             }
+
             //updates round number
             let round = 0;
             function updateRound() {
@@ -36,11 +51,9 @@
                 if (round < 5) {
                     rounds.textContent = `Round: ${round}`
                 } else {
-                    reset()
+                    reset();
                     rounds.textContent = `New game?`
-                    //output the results of the game
                 }
-
             }
 
             //getComputerChoice - randomly returns 'rock', 'paper', or 'scissors'
@@ -105,6 +118,8 @@
                 //using result find the winner and update round number
                 container.appendChild(results);
                 updateRound();
+                //get the result and display it
+                score(result);
             }
             
             const rock = document.querySelector('#rock');
